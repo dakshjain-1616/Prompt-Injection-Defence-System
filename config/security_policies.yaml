@@ -1,0 +1,60 @@
+constitutional_principles:
+  safety:
+    description: "Ensure responses do not contain harmful, dangerous, or violent content"
+    weight: 1.0
+    violation_keywords:
+      - "harm"
+      - "violence"
+      - "weapon"
+      - "illegal"
+      - "dangerous"
+  
+  honesty:
+    description: "Provide truthful information without deception or fabrication"
+    weight: 0.9
+    violation_patterns:
+      - "make up"
+      - "fabricate"
+      - "lie about"
+  
+  helpfulness:
+    description: "Provide useful, relevant responses aligned with user intent"
+    weight: 0.8
+
+injection_patterns:
+  role_switching:
+    - "(?i)ignore (all )?previous (instructions?|prompts?|rules?)"
+    - "(?i)disregard (all )?(previous|above) (instructions?|context)"
+    - "(?i)you are now"
+    - "(?i)new instructions?"
+    - "(?i)system prompt"
+    - "(?i)forget (everything|all previous)"
+  
+  jailbreak:
+    - "(?i)DAN mode"
+    - "(?i)developer mode"
+    - "(?i)evil mode"
+    - "(?i)unrestricted mode"
+    - "(?i)jailbreak"
+  
+  context_manipulation:
+    - "(?i)\\[SYSTEM\\]"
+    - "(?i)\\[ADMIN\\]"
+    - "(?i)<\\|.*\\|>"
+    - "(?i)sudo"
+    - "(?i)override"
+
+blacklist_keywords:
+  - "ignore instructions"
+  - "bypass filter"
+  - "disable safety"
+  - "remove restrictions"
+
+input_constraints:
+  max_length: 10000
+  max_repetition_ratio: 0.3
+  min_entropy: 2.0
+
+output_validation:
+  toxicity_threshold: 0.7
+  max_output_length: 5000
